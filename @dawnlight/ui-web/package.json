@@ -1,0 +1,110 @@
+{
+  "name": "@dawnlight/ui-web",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "style": "dist/styles.css",
+  "exports": {
+    "./styles.css": "./dist/styles.css",
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "size-limit": [
+    {
+      "path": "dist/cjs/index.js",
+      "limit": "20 KB"
+    },
+    {
+      "path": "dist/esm/index.js",
+      "limit": "20 KB"
+    }
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "license": "UNLICENSED",
+  "scripts": {
+    "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx --ignore \"src/**/*.test.tsx\" --ignore \"src/**/*.stories.tsx\" -d dist/cjs --source-maps",
+    "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx --ignore \"src/**/*.test.tsx\" --ignore \"src/**/*.stories.tsx\" -d dist/esm --source-maps",
+    "build:css": "cross-env NODE_ENV=production postcss ./src/styles/styles.css -o ./dist/styles.css",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
+    "build": "concurrently yarn:build:*",
+    "lint:src": "eslint src --ext ts,tsx --fix",
+    "lint:types": "tsc --project ./ --pretty --noEmit",
+    "lint": "yarn lint:src && yarn lint:types",
+    "size": "size-limit",
+    "size:why": "size-limit --why",
+    "prebuild": "rimraf dist",
+    "prepare": "husky install",
+    "dev": "nodemon --watch src --exec yarn build -e ts,tsx,css",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.0",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@emotion/babel-plugin": "^11.3.0",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/react": "^6.2.9",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.6",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "autoprefixer": "^10.2.5",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-annotate-pure-calls": "^0.4.0",
+    "babel-plugin-import": "^1.13.3",
+    "babel-plugin-styled-components": "^1.12.0",
+    "concurrently": "^6.0.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "keycloak-js": "^13.0.1",
+    "lint-staged": "^10.5.4",
+    "nodemon": "^2.0.7",
+    "postcss": "^8.2.15",
+    "postcss-cli": "^8.3.1",
+    "postcss-loader": "^4.2.0",
+    "prettier": "^2.2.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "size-limit": "^4.10.2",
+    "tailwindcss": "^2.1.2",
+    "typescript": "^4.2.4",
+    "webpack-merge": "^5.7.3"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.3.0",
+    "@emotion/styled": "^11.3.0",
+    "react": ">=16"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.2.0",
+    "@popperjs/core": "^2.9.2",
+    "classnames": "^2.3.1",
+    "react-input-mask": "^2.0.4",
+    "react-popper": "^2.2.5"
+  }
+}

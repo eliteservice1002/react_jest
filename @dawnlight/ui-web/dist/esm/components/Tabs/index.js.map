@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../src/components/Tabs/index.ts"],"names":[],"mappings":"AAAA,cAAc,QAAd;AACA,cAAc,OAAd;AACA,cAAc,YAAd","sourcesContent":["export * from './Tabs';\nexport * from './Tab';\nexport * from './TabPanel';\n"],"file":"index.js"}
